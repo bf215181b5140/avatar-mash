@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --tw-gradient-stops: #54bbfc, #2f84fe;
+  --tw-shadow-color: black;
+}
+
+body {
+  background: #121212;
+  color: #ededed;
+  font-family: Arial, Helvetica, sans-serif;
+}
