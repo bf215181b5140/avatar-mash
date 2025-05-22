@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import Avatar from './avatar.component';
 import { AvatarDTO, MatchDTO, MatchResultDTO } from '../../model/database.model';
+import Image from 'next/image';
 
 export default function Match() {
   const [matchQueue, setMatchQueue] = useState<MatchDTO[] | null>(null);
@@ -41,9 +42,10 @@ export default function Match() {
 
   return (<div className={'flex flex-col md:flex-row w-full px-10 pb-12 justify-center items-center'}>
     <Avatar avatar={currentMatch.avatar1} onClick={() => handleMatch(currentMatch.avatar1)} />
-    <div style={{ boxShadow: '0 0 35px 5px black' }} className={'text-4xl bg-linear-to-t py-4 pl-3.5 pr-4.5 -m-6 border z-10 pointer-events-none italic font-bold rounded-full'}>
-      VS
-    </div>
+    {/* <div style={{ boxShadow: '0 0 35px 5px black' }} className={'text-4xl bg-linear-to-t py-4 pl-3.5 pr-4.5 -m-6 border z-10 pointer-events-none italic font-bold rounded-full'}> */}
+    {/*   VS */}
+    {/* </div> */}
+    <Image aria-hidden src="/vs.png" alt="vs" width={160 / 1.5} height={133 / 1.5} className={'pointer-events-none -mx-10 -my-8 z-10'} />
     <Avatar avatar={currentMatch.avatar2} onClick={() => handleMatch(currentMatch.avatar2)} />
   </div>);
 }
