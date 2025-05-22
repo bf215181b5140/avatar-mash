@@ -7,9 +7,11 @@ import Image from 'next/image';
 const dosis = Dosis({
   variable: '--font-dosis',
   weight: '500',
+  subsets: ['latin'],
 });
 const notoSans = Noto_Sans({
   variable: '--font-noto-sans',
+  subsets: ['latin'],
 });
 
 export const metadata: Metadata = {
