@@ -41,7 +41,8 @@ async function processImage(file: string): Promise<{ name: string; url: string }
     .upload(uniqueFileName, fs.createReadStream(tempFile), {
       duplex: 'half',
       cacheControl: '3600',
-      upsert: false
+      upsert: false,
+      contentType: `image/${extension}`
     });
 
   if (error) {
