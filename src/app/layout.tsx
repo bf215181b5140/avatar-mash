@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (<html lang="en">
   <body className={`${dosis.className} antialiased`}>
-  <div className={'flex flex-column flex-wrap gap-10 w-full'}>
+  <div className={'flex flex-column flex-wrap gap-10 w-full h-full content-start'}>
     <div className={'flex flex-col md:flex-row align w-full justify-center items-center gap-5'}>
         <Image aria-hidden src="/logo.png" alt="Avatar mash" width={543 / 1.5} height={179 / 1.5} className={'pointer-events-none order-1 md:order-2'} />
       <Link href={'/'} className={'relative text-2xl hover:text-blue-300 flex flex-row items-center gap-1 order-2 md:order-1'}>
@@ -34,7 +34,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <Image aria-hidden src="/crown.png" alt="Rankings" width={24} height={24} className={'pointer-events-none absolute -top-2 -right-3 rotate-20'} />
       </Link>
     </div>
-    <div className={'shrink-0 grow-1'}>
+    <div className={'shrink-0 grow-1 flex justify-center items-center'}>
       {children}
     </div>
   </div>
