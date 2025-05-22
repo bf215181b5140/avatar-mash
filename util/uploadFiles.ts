@@ -2,10 +2,15 @@ import { createClient } from '@supabase/supabase-js';
 import * as fs from 'fs';
 import * as path from 'path';
 import sharp from 'sharp';
+import dotenv from 'dotenv';
 
-const supabase = createClient(
-  '',
-  '');
+dotenv.config({ path: '../.env' });
+
+if (!process.env.DB_URL || !process.env.DB_KEY) {
+  throw new Error('Missing required environment variables: DB_URL and DB_KEY');
+}
+
+const supabase = createClient(process.env.DB_URL!, process.env.DB_KEY!);
 
 async function generateUniqueFilename(extension: string): Promise<string> {
   const timestamp = new Date().getTime();
