@@ -53,9 +53,6 @@ export const MatchResultSchema = z.object({
 
 export type MatchResultDTO = z.infer<typeof MatchResultSchema>;
 
-export const RankingsSchema = z.object({
-  total: z.number(),
-  rankings: z.array(AvatarSchema),
-});
+export const RankingsSchema = z.array(AvatarSchema);
 
 export type RankingsDTO = z.infer<typeof RankingsSchema>;

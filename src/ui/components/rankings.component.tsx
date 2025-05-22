@@ -23,8 +23,6 @@ export default function Rankings() {
 
   if (!rankings) return <Loading />;
 
-  const more = rankings.total - rankings.rankings.length;
-
   function maxWidthFromIndex(index: number) {
     switch (index) {
       case 0:
@@ -52,12 +50,12 @@ export default function Rankings() {
   }
 
   return (<div className={'flex flex-col gap-7 w-full px-3 md:px-10 py-12 justify-center items-center'}>
-    {rankings.rankings.map((avatar, index) => <div key={avatar.id} style={{ backgroundImage: `url(${avatar.image})`, boxShadow: 'inset 0 0 35px 5px black' , borderColor: colorFromIndex(index), color: colorFromIndex(index) }}
+    <h1 className={'text-2xl mb-10'}>Top 30 avatars</h1>
+    {rankings.map((avatar, index) => <div key={avatar.id} style={{ backgroundImage: `url(${avatar.image})`, boxShadow: 'inset 0 0 35px 5px black' , borderColor: colorFromIndex(index), color: colorFromIndex(index) }}
                                                    className={`border rounded-sm w-full ${maxWidthFromIndex(index)} aspect-3/4 bg-cover bg-no-repeat bg-center pointer-events-none relative`}>
       {index === 0 && <Image aria-hidden src="/crown.png" alt="Rankings" width={130} height={130} className={'hidden sm:block pointer-events-none absolute -top-22 -left-14 -rotate-30'} />}
       <span style={{ textShadow: '0 0 2px black' }}
             className={`pointer-events-none absolute ${index > 2 ? 'text-2xl' : 'text-4xl'} top-2 right-3`}>{index + 1}</span>
     </div>)}
-    {more > 0 && <div className={'text-gray-400'}>and {more} more...</div>}
   </div>);
 }

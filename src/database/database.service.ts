@@ -22,12 +22,7 @@ class DatabaseService {
       .limit(30)
       .then(res => z.array(AvatarSchema).parse(res.data));
 
-    const count = await this.supabase
-      .from('Avatars')
-      .select('*', { count: 'exact', head: true })
-      .then(res => z.number().parse(res.count));
-
-    return RankingsSchema.parse({ rankings: avatars, total: count })
+    return RankingsSchema.parse(avatars)
   }
 
   async getMatch() {
