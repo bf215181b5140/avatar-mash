@@ -20,7 +20,7 @@ export default class Express {
     this.app.use(express.json());
 
     // Development logging
-    this.app.use(morgan('dev'));
+    if (process.env.NODE_ENV === 'development') this.app.use(morgan('dev'));
 
     // Serve static files
     this.app.use(express.static(path.join(__dirname, '../website')));
