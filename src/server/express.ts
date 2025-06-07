@@ -1,23 +1,32 @@
-import express, { Application, NextFunction, Request, Response } from 'express';
+import express, { Application, NextFunction, Request, Response, Router } from 'express';
 import helmet from 'helmet';
 import path from 'path';
+import morgan from 'morgan';
 import { Server } from 'http';
+import { MatchRouter } from './api/match/match.router';
+import { DatabaseService } from './database/database.service';
+import { RankingsRouter } from './api/rankings/rankings.router';
+import { ProfileRouter } from './api/profile/profile.router';
 
 export default class Express {
   public app: Application;
   public server: Server;
 
-  constructor() {
+  constructor(private database: DatabaseService) {
     this.app = express();
 
     // Prefix middleware
     this.app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
+    this.app.use(express.json());
+
+    // Development logging
+    this.app.use(morgan('dev'));
 
     // Serve static files
     this.app.use(express.static(path.join(__dirname, '../website')));
 
     // API routes
-    this.addRoutes();
+    this.app.use('/api', this.apiRouter());
 
     // Handle 404
     this.app.use((req, res) => {
@@ -33,7 +42,14 @@ export default class Express {
     });
   }
 
-  private addRoutes() {
+  /**
+   * Constructs the API router
+   *
+   */
+  private apiRouter() {
+    const apiRouter = Router();
+
+    // Testing routes
     this.app.get('/', (req, res) => {
       this.calculateNewElos(1658, 1125, 2);
       res.send('Hello world!');
@@ -44,6 +60,13 @@ export default class Express {
       throw new Error('testing async error');
       res.send('Async test.');
     });
+
+    // API routes
+    apiRouter.use('/match', new MatchRouter(this.database).router());
+    apiRouter.use('/rankings', new RankingsRouter(this.database).router());
+    apiRouter.use('/profile', new ProfileRouter(this.database).router());
+
+    return apiRouter;
   }
 
   private errorHandler() {

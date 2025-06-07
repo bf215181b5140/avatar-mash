@@ -4,10 +4,10 @@ import type { Avatar } from './avatar.entity';
 
 @Entity()
 export class Match extends BaseIdEntity {
-  @ManyToOne('Avatar', { onDelete: 'CASCADE', nullable: false })
+  @ManyToOne('Avatar', { onDelete: 'CASCADE' })
   avatar1: Relation<Avatar>;
 
-  @ManyToOne('Avatar', { onDelete: 'CASCADE', nullable: false })
+  @ManyToOne('Avatar', { onDelete: 'CASCADE' })
   avatar2: Relation<Avatar>;
 
   @Column({ default: 0 })

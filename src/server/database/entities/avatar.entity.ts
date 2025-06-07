@@ -6,8 +6,8 @@ import type { AvatarBorder } from './avatarBorder.entity';
 
 @Entity()
 export class Avatar extends BaseIdEntity {
-  @Column()
-  imagePath: string;
+  @Column({ unique: true })
+  filename: string;
 
   @Column({ default: 0, select: false })
   approved: boolean;

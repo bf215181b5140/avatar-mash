@@ -1,5 +1,6 @@
 import { DataSource } from 'typeorm';
 import { syncDatabaseData } from './database.data';
+import { Match } from './entities/match.entity';
 
 export class DatabaseService extends DataSource {
 
@@ -11,8 +12,19 @@ export class DatabaseService extends DataSource {
       username: process.env.DB_USER || '',
       password: process.env.DB_PASSWORD || '',
       database: process.env.DB_NAME || '',
-      entities: [__dirname + '/entities/*.entity.js'],
+      entities: [__dirname + '/entities/*'],
     });
+
+    // This interval will delete all matches that haven't been submitted in 5 minutes
+    setInterval(async () => {
+      this.createQueryBuilder<Match>(Match, 'match')
+        .delete()
+        .where('match.submitted = 0')
+        .andWhere('match.createDate < :date', { date: new Date(Date.now() - 5 * 60 * 1000) })
+        .execute()
+        .then(result => console.log(`Deleted ${result.affected} matches that haven't been submitted in 5 minutes`))
+        .catch(err => console.error(`Failed to delete matches that haven't been submitted in 5 minutes`, err));
+    }, 5 * 60 * 1000);
   }
 
   async initialize() {
