@@ -6,11 +6,14 @@ import type { Credentials } from './credentials.entity';
 @Entity()
 export class User extends BaseIdEntity {
   @Column('text')
-  displayName: string;
+  displayName!: string;
+
+  @Column('text')
+  image!: string | null;
 
   @OneToMany('Avatar', (avatar: Avatar) => avatar.user)
-  avatars: Relation<Avatar[]>;
+  avatars!: Relation<Avatar[]>;
 
   @OneToMany('Credentials', (credentials: Credentials) => credentials.user)
-  credentials: Relation<Credentials[]>;
+  credentials!: Relation<Credentials[]>;
 }

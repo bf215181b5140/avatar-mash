@@ -5,17 +5,17 @@ import type { Avatar } from './avatar.entity';
 @Entity()
 export class Match extends BaseIdEntity {
   @ManyToOne('Avatar', { onDelete: 'CASCADE' })
-  avatar1: Relation<Avatar>;
+  avatar1!: Relation<Avatar>;
 
   @ManyToOne('Avatar', { onDelete: 'CASCADE' })
-  avatar2: Relation<Avatar>;
+  avatar2!: Relation<Avatar>;
 
   @Column({ default: 0 })
-  submitted: boolean;
+  submitted!: boolean;
 
   @Column('enum', { enum: [1, 2], nullable: true })
-  winner: number | null;
+  winner!: number | null;
 
   @Column('int', { nullable: true })
-  change: number | null;
+  change!: number | null;
 }

@@ -37,6 +37,10 @@ p {
   }
 }
 
+img {
+  display: inline-block;
+}
+
 /*ul, ol {*/
 /*  margin: 5px 0;*/
 /*  padding-inline-start: 25px;*/

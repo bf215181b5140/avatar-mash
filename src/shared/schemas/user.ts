@@ -4,6 +4,7 @@ import { AvatarSchema } from './avatar';
 export const UserSchema = z.object({
   id: z.string(),
   displayName: z.string(),
+  image: z.string(),
   avatars: z.array(AvatarSchema).optional(),
 });
 

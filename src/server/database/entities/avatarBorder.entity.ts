@@ -4,5 +4,5 @@ import { AvatarBorderName, AvatarBorderNameSchema } from '../../../shared/schema
 @Entity()
 export class AvatarBorder extends BaseEntity {
   @PrimaryColumn('enum', { enum: AvatarBorderNameSchema.options, unique: true })
-  name: AvatarBorderName;
+  name!: AvatarBorderName;
 }

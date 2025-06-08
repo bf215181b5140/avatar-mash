@@ -1,7 +1,11 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { UserContext } from '../context/user.context';
 
 export default function Header() {
+
+  const { isLoading, isLoggedIn, user } = useContext(UserContext);
 
   return (<HeaderStyled>
     <div className={'logo'}>
@@ -17,8 +21,12 @@ export default function Header() {
     </Link>
     <Link to={'/profile'} className={'profile'}>
       Your profile
-      <div><i className={'ri-user-fill'} /></div>
+      {!user?.image && <div><i className={'ri-user-fill'} /></div>}
+      {user?.image && <img src={user.image} alt={'Your profile'} />}
     </Link>
+
+    {/* <UserMenuComponent /> */}
+
   </HeaderStyled>);
 }
 
@@ -32,6 +40,7 @@ const HeaderStyled = styled.header`
   align-content: center;
   justify-content: center;
   position: relative;
+  margin-bottom: 30px;
 
   .match {
     order: 1;
@@ -54,9 +63,9 @@ const HeaderStyled = styled.header`
 
   .profile {
     order: 4;
-    position: absolute;
-    top: 20px;
-    right: 20px;
+    //position: absolute;
+    //top: 20px;
+    //right: 20px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -86,6 +95,13 @@ const HeaderStyled = styled.header`
         position: relative;
         bottom: -3px;
       }
+    }
+
+    > img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      margin-left: 10px;
     }
   }
 

@@ -6,11 +6,11 @@ import type { User } from './user.entity';
 @Unique(['provider', 'subject'])
 export class Credentials extends BaseIdEntity {
   @Column('varchar')
-  provider: string;
+  provider!: string;
 
   @Column('varchar', { comment: 'User ID' })
-  subject: string;
+  subject!: string;
 
   @ManyToOne('User', (user: User) => user.credentials, { onDelete: 'CASCADE', nullable: false })
-  user: Relation<User>;
+  user!: Relation<User>;
 }

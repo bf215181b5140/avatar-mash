@@ -2,7 +2,7 @@ import { Avatar } from '../database/entities/avatar.entity';
 
 export default function calculateElo(avatar1: Avatar, avatar2: Avatar, winner: string, matchType: 'public' | 'normal') {
 
-  let ratingWeight = 0;
+  let ratingWeight = 3;
 
   switch (matchType) {
     case 'normal':

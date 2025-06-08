@@ -3,13 +3,13 @@ import { nanoid } from 'nanoid';
 
 export abstract class BaseIdEntity extends BaseEntity {
   @PrimaryColumn({ length: 20, unique: true })
-  id: string;
+  id!: string;
 
   @CreateDateColumn({ select: false })
-  createDate: Date;
+  createDate!: Date;
 
   @UpdateDateColumn({ select: false })
-  updateDate: Date;
+  updateDate!: Date;
 
   @BeforeInsert()
   generateId() {

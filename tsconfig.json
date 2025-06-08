@@ -9,7 +9,7 @@
     "jsx": "react-jsx",
     //    "allowImportingTsExtensions": true,
     /* for typeorm I think, check please */
-    "strictPropertyInitialization": false,
+    "strictPropertyInitialization": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     /* Do I need these? */

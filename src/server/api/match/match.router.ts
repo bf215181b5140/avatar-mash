@@ -29,6 +29,7 @@ export class MatchRouter extends BaseRouter {
   private post() {
     return async (req: Request, res: Response, next: NextFunction) => {
       const matchResult = MatchResultSchema.parse(req.body);
+      const matchType = req.user ? 'normal' : 'public';
 
       await this.database.transaction(async em => {
         const match = await em.createQueryBuilder<Match>(Match, 'match')
@@ -42,8 +43,7 @@ export class MatchRouter extends BaseRouter {
             .orWhere('match.avatar2 = :avatar2', { avatar2: matchResult.winner })))
           .getOneOrFail();
 
-        // TODO: is used logged in affects match type
-        const { avatar1Elo, avatar2Elo, change } = calculateElo(match.avatar1, match.avatar2, matchResult.winner, 'normal');
+        const { avatar1Elo, avatar2Elo, change } = calculateElo(match.avatar1, match.avatar2, matchResult.winner, matchType);
 
         await em.update(Avatar, { id: match.avatar1.id }, { elo: avatar1Elo });
         await em.update(Avatar, { id: match.avatar2.id }, { elo: avatar2Elo });
