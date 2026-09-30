@@ -13,17 +13,18 @@ export class DatabaseService extends DataSource {
       password: process.env.DB_PASSWORD || '',
       database: process.env.DB_NAME || '',
       entities: [__dirname + '/entities/*'],
+      synchronize: true
     });
 
     // This interval will delete all matches that haven't been submitted in 5 minutes
     setInterval(async () => {
       this.createQueryBuilder<Match>(Match, 'match')
-        .delete()
-        .where('match.submitted = 0')
-        .andWhere('match.createDate < :date', { date: new Date(Date.now() - 5 * 60 * 1000) })
-        .execute()
-        .then(result => console.log(`Deleted ${result.affected} matches that haven't been submitted in 5 minutes`))
-        .catch(err => console.error(`Failed to delete matches that haven't been submitted in 5 minutes`, err));
+          .delete()
+          .where('match.submitted = 0')
+          .andWhere('match.createDate < :date', { date: new Date(Date.now() - 5 * 60 * 1000) })
+          .execute()
+          .then(result => console.log(`Deleted ${result.affected} matches that haven't been submitted in 5 minutes`))
+          .catch(err => console.error(`Failed to delete matches that haven't been submitted in 5 minutes`, err));
     }, 5 * 60 * 1000);
   }
 

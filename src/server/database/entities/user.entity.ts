@@ -11,6 +11,15 @@ export class User extends BaseIdEntity {
   @Column('text')
   image!: string | null;
 
+  @Column({ length: 100, default: '' })
+  link_x!: string;
+
+  @Column({ length: 100, default: '' })
+  link_vrc!: string;
+
+  @Column({ length: 100, default: '' })
+  discord!: string;
+
   @OneToMany('Avatar', (avatar: Avatar) => avatar.user)
   avatars!: Relation<Avatar[]>;
 

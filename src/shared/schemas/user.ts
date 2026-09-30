@@ -5,6 +5,9 @@ export const UserSchema = z.object({
   id: z.string(),
   displayName: z.string(),
   image: z.string(),
+  link_x: z.string(),
+  link_vrc: z.string(),
+  discord: z.string(),
   avatars: z.array(AvatarSchema).optional(),
 });
 

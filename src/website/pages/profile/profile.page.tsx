@@ -16,14 +16,14 @@ export default function ProfilePage() {
       {user?.avatars?.map(avatar => <img key={avatar.id} src={`https://file.avatarmash.com/${avatar.filename}`} alt={avatar.filename} width={'250px'} />)}
     </div>
 
-    <div style={{ width: '200px', border: '1px solid black' }}>
+    <aside style={{ width: '200px', border: '1px solid black' }}>
       <p>Side menu</p>
       <a href={'/api/logout'}>Log out</a>
-    </div>
+    </aside>
 
-    <div style={{ width: '500px', maxWidth: '100%', border: '1px solid black' }}>
+    <main style={{ width: '500px', maxWidth: '100%', border: '1px solid black' }}>
       Main content
-    </div>
+    </main>
 
   </ProfilePageStyled>);
 }

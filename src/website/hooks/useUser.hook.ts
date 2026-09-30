@@ -8,8 +8,13 @@ export default function useUser() {
 
   useEffect(() => {
     fetch('/api/user').then(async res => {
-      setUser(UserSchema.parse(await res.json()));
-      setIsLoading(false);
+      if (res.status === 200 && res.headers.get('content-type')?.includes('application/json')) {
+        setUser(UserSchema.parse(await res.json()));
+        setIsLoading(false);
+      } else {
+        setUser(null);
+        setIsLoading(false);
+      }
     });
   }, []);
 

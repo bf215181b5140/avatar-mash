@@ -15,8 +15,7 @@ export class UserRouter extends BaseRouter {
   get() {
     return async (req: Request, res: Response, next: NextFunction) => {
 
-      // todo check/require user to exist
-      if (!req.user) res.send(null);
+      if (!req.user) res.sendStatus(204);
 
       const result = await this.database.createQueryBuilder<User>(User, 'user')
         .leftJoinAndSelect('user.avatars', 'avatar')
