@@ -1,3 +1,3 @@
-## TODO
+# AvatarMash
 
-Check if I need express-async-errors and what exactly it does
+Website to upload avatars (images) and have them ranked by the community. 
