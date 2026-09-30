@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'Dosis-Bold';
+  src: local('Dosis-Bold'), url(style/Dosis-Bold.ttf) format('truetype');
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -35,4 +40,15 @@ body {
   100% {
     transform: rotate(360deg);
   }
+}
+
+.avatarmash-stroke {
+  padding: 0.15em;
+  -webkit-text-stroke-width: 0.25em;
+  -webkit-text-fill-color: #ededed;
+  -webkit-text-stroke-color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  background-image:-webkit-linear-gradient(90deg, #2f84fe 10%, #54bbfc 90%);
+  font-family: Dosis-Bold, sans-serif;
 }
